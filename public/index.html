@@ -53,8 +53,8 @@ function getAppUrl() {
 			"default": "http://ulima.edu.pe"
 		},
 		"cammp":{
-		// 	"iOS": "https://itunes.apple.com/pe/app/ulima-app/id879120306?l=en&mt=8",
-		// 	"android": "https://play.google.com/store/apps/details?id=pe.edu.ulima.campus50",
+			"iOS": "http://ulima.edu.pe/",
+			"android": "http://ulima.edu.pe/",
 			"default": "http://ulima.edu.pe/"
 		},
 		"campus50": {
@@ -68,26 +68,31 @@ function getAppUrl() {
 			"default": "http://ulima.edu.pe/"
 		},
 		"ccul": {
+			"iOS": "https://www.centroculturalulima.com/wp/",
+			"android": "https://www.centroculturalulima.com/wp/",
 			"default": "https://www.centroculturalulima.com/wp/"
 		}
 	};
 
 	var link;
 
-    if (/windows phone/i.test(userAgent)) {
-    	link = links[app].windows;
-    }
-	else if (/android/i.test(userAgent)) {
-	    link = links[app].android;
-	}
-	else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-	    link = links[app].iOS;
-	}
-	else{
+	if (links[app]) {
+    	if (/windows phone/i.test(userAgent)) {
+	    	link = links[app].windows;
+	    }
+		else if (/android/i.test(userAgent)) {
+		    link = links[app].android;
+		}
+		else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+		    link = links[app].iOS;
+		}
+		else{
+			link = links[app].default;
+		}
+	}else{
 		link = "http://ulima.edu.pe/";
 	}
-		
-	if (!link) link = links[app].default;
+
 
 	return link;
 }
