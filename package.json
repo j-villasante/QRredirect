@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/j-villasante/QRredirect/issues"
   },
-  "homepage": "https://github.com/j-villasante/QRredirect#readme"
+  "homepage": "https://github.com/j-villasante/QRredirect#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }

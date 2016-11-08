@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Redirect</title>
+</head>
+<body>
+<script type="text/javascript">
+'use strict';
+
+function getMobileOperatingSystem() {
+	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+	// Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "http://ulima.edu.pe";
+    }
+
+	if (/android/i.test(userAgent)) {
+	    return "https://play.google.com/store/apps/details?id=pe.edu.ulima&hl=en";
+	}
+
+	// iOS detection from: http://stackoverflow.com/a/9039885/177710
+	if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+	    return "https://itunes.apple.com/pe/app/ulima-app/id879120306?l=en&mt=8";
+	}
+
+	return "http://ulima.edu.pe";
+}
+
+window.location = getMobileOperatingSystem();
+</script>
+</body>
+</html>
