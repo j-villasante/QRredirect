@@ -5,26 +5,61 @@
 </head>
 <body>
 <script type="text/javascript">
+
 'use strict';
 
 function getMobileOperatingSystem() {
 	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-	// Windows Phone must come first because its UA also contains "Android"
+	var app = window.location.href.split('?')[1];
+
+	var links = {
+		"u": {
+			"iOS": "https://itunes.apple.com/pe/app/ulima-app/id879120306",
+			"android": "https://play.google.com/store/apps/details?id=pe.edu.ulima",
+			"default": "http://ulima.edu.pe"
+		},
+		"cammp":{
+		// 	"iOS": "https://itunes.apple.com/pe/app/ulima-app/id879120306?l=en&mt=8",
+		// 	"android": "https://play.google.com/store/apps/details?id=pe.edu.ulima.campus50",
+			"default": "http://ulima.edu.pe/"
+		},
+		"campus50": {
+			"iOS": "https://itunes.apple.com/pe/app/campus-50/id1163410960",
+			"android": "https://play.google.com/store/apps/details?id=pe.edu.ulima.campus50",
+			"default": "http://ulima.edu.pe"
+		},
+		"eventos": {
+			"iOS": "https://itunes.apple.com/pe/app/sia-2016/id999097645",
+			"android": "https://play.google.com/store/apps/details?id=pe.edu.ulima.eventos",
+			"default": "http://ulima.edu.pe/"
+		},
+		"ccul": {
+			"default": "https://www.centroculturalulima.com/wp/"
+		}
+	};
+
+	var link;
+
     if (/windows phone/i.test(userAgent)) {
-        return "http://ulima.edu.pe";
+    	link = links[app].windows;
+    	if (!link) link = links[app].default;
+    	return link;
     }
 
 	if (/android/i.test(userAgent)) {
-	    return "https://play.google.com/store/apps/details?id=pe.edu.ulima&hl=en";
+	    link = links[app].android;
+    	if (!link) link = links[app].default;
+    	return link;
 	}
 
-	// iOS detection from: http://stackoverflow.com/a/9039885/177710
 	if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-	    return "https://itunes.apple.com/pe/app/ulima-app/id879120306?l=en&mt=8";
+	    link = links[app].iOS;
+    	if (!link) link = links[app].default;
+    	return link;
 	}
 
-	return "http://ulima.edu.pe";
+	return links[app].default;
 }
 
 window.location = getMobileOperatingSystem();
